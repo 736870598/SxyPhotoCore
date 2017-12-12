@@ -10,17 +10,17 @@ public class PhotoConfig {
      * 本module中使用
      */
     //是否需要压缩
-    static final String NEED_COMPRESS = "needCompress";
+    public static final String NEED_COMPRESS = "needCompress";
     //保存路径
-    static final String SAVE_PATH = "savePath";
+    public static final String SAVE_PATH = "savePath";
     //是否查看单张照片
-    static final String ONE_PHOTO = "isOnePhoto";
+    public static final String ONE_PHOTO = "isOnePhoto";
     //查看单张照片路径
-    static final String PHOTO_PATH = "photoPath";
+    public static final String PHOTO_PATH = "photoPath";
     //查看照片集合
-    static final String PHOTO_PATH_LIST = "photoPathList";
+    public static final String PHOTO_PATH_LIST = "photoPathList";
     //查看照片位置
-    static final String SEE_POS = "seePos";
+    public static final String SEE_POS = "seePos";
 
     /**
      * 返回给调用者使用，拍照或选取后图片的保存路径

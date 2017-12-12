@@ -6,29 +6,29 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 
+import com.sunxiaoyu.photocore.core.RxPermissionsManager;
 import com.sunxiaoyu.photocore.core.SxySeePhotoActivity;
 import com.sunxiaoyu.photocore.core.SxySelectPhotoActivity;
-import com.sunxiaoyu.photocore.core.SxyTakePhotoAcivity;
+import com.sunxiaoyu.photocore.core.SxyTakePhotoActivity;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  *
- * 选择图片， 拍照， 压缩图片， 查看图片
+ * 选择图片， 拍照， 压缩图片， 查看图片, 申请权限
  *
  * Created by SunXiaoyu on 2017/12/11/011.
  */
-public class SxyPhotoManager {
+public class SxyUtilsManager {
 
-    private SxyPhotoManager(){}
+    private SxyUtilsManager(){}
 
-    public static SxyPhotoManager getManager(){
+    public static SxyUtilsManager getManager(){
         return SxyPhotoManagerHolder.instance;
     }
 
     private static class SxyPhotoManagerHolder{
-           static SxyPhotoManager instance = new SxyPhotoManager();
+           static SxyUtilsManager instance = new SxyUtilsManager();
     }
 
 
@@ -54,7 +54,7 @@ public class SxyPhotoManager {
      * @param savePath      保存路径
      */
     public void takePhoto(Activity act, int requestCode, boolean needCompress, String savePath){
-        Intent intent = new Intent(act, SxyTakePhotoAcivity.class);
+        Intent intent = new Intent(act, SxyTakePhotoActivity.class);
         intent.putExtra(PhotoConfig.NEED_COMPRESS, needCompress);
         intent.putExtra(PhotoConfig.SAVE_PATH, savePath);
         act.startActivityForResult(intent, requestCode);
@@ -106,6 +106,19 @@ public class SxyPhotoManager {
      */
     public void compress(Bitmap bitmap, String savePath, int quality){
 
+    }
+
+
+    /**
+     * 申请权限
+     * 最好放在onstart中请求。。。。
+     *
+     * @param activity      activity
+     * @param listener      权限处理结果，未授权会重复请求，授权通过该回调传出
+     * @param permissions   申请的权限 ps: Manifest.permission.WRITE_EXTERNAL_STORAGE
+     */
+    public void requestPermissions(Activity activity, RxPermissionsManager.PermissionDealListener listener, String...permissions){
+        RxPermissionsManager.getManager().requestPermissions(activity, listener, permissions);
     }
 
 }
