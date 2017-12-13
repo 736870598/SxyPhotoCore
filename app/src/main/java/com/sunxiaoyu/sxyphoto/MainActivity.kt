@@ -22,13 +22,22 @@ class MainActivity : AppCompatActivity() {
 
     fun takePhoto(view: View){
         val savePath = "${Environment.getExternalStorageDirectory().absolutePath}/sunxyPhoto/${System.currentTimeMillis()}.jpg"
-        SxyUtilsManager.getManager().takePhoto(this, 100, false, savePath)
+        SxyUtilsManager.getManager().takePhoto(this, 100, true, savePath)
+    }
+
+    fun selectPhoto(view: View){
+        val savePath = "${Environment.getExternalStorageDirectory().absolutePath}/sunxyPhoto/${System.currentTimeMillis()}.jpg"
+        SxyUtilsManager.getManager().selectPhoto(this, 100, true, savePath)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         val path = data?.getStringExtra(PhotoConfig.RESULT_PHOTO_PATH)
         imageView.setImageBitmap(BitmapFactory.decodeFile(path))
+
+        imageView.setOnClickListener{
+            SxyUtilsManager.getManager().seePhoto(this, path)
+        }
     }
 
 }

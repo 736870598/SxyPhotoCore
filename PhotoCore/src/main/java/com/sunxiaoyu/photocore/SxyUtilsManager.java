@@ -6,10 +6,11 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 
-import com.sunxiaoyu.photocore.core.RxPermissionsManager;
-import com.sunxiaoyu.photocore.core.SxySeePhotoActivity;
-import com.sunxiaoyu.photocore.core.SxySelectPhotoActivity;
-import com.sunxiaoyu.photocore.core.SxyTakePhotoActivity;
+import com.sunxiaoyu.photocore.core.ui.SxySelectPhotoActivity;
+import com.sunxiaoyu.photocore.core.ui.SxyTakePhotoActivity;
+import com.sunxiaoyu.photocore.core.utils.JpegBmpUtils;
+import com.sunxiaoyu.photocore.core.utils.RxPermissionsManager;
+import com.sunxiaoyu.photocore.core.ui.SxySeePhotoActivity;
 
 import java.util.ArrayList;
 
@@ -28,7 +29,7 @@ public class SxyUtilsManager {
     }
 
     private static class SxyPhotoManagerHolder{
-           static SxyUtilsManager instance = new SxyUtilsManager();
+        static SxyUtilsManager instance = new SxyUtilsManager();
     }
 
 
@@ -105,6 +106,9 @@ public class SxyUtilsManager {
      * @param quality   压缩质量（默认30%）
      */
     public void compress(Bitmap bitmap, String savePath, int quality){
+        JpegBmpUtils.compressBmp(bitmap, savePath, quality);
+        if (bitmap.isRecycled())
+            bitmap.recycle();
 
     }
 
