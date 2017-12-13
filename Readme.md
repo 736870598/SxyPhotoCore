@@ -67,7 +67,7 @@
 ## GildeUtils
 
     /**
-     *  加载图片
+     *  加载图片--
      *  @param fragment Fragment
      */
     public static void loadImage(Fragment fragment, String url, ImageView imageView)
