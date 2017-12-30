@@ -17,14 +17,14 @@ android {
         }
 
         ndk {
-            abiFilters "armeabi"
+            abiFilters "armeabi","armeabi-v7a"
         }
 
     }
 
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
             shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'consumer-proguard-rules.pro'
         }
@@ -53,5 +53,4 @@ dependencies {
     compile 'com.tbruyelle.rxpermissions2:rxpermissions:0.9.4@aar'
     compile 'com.github.bumptech.glide:glide:4.0.0-RC0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.0.0-RC0'
-    compile 'com.hwangjr.proguard:proguardconfig:1.0.1@aar'
 }

@@ -8,6 +8,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.TextView;
 
 import com.sunxiaoyu.photocore.PhotoConfig;
@@ -34,6 +35,10 @@ public class SxySeePhotoActivity extends AppCompatActivity implements ViewPager.
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        //设置全屏
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         isOne = getIntent().getBooleanExtra(PhotoConfig.ONE_PHOTO, true);
         if (isOne){
