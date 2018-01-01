@@ -26,7 +26,7 @@ public class GlideUtils {
         //清除之前imageView上的缓存图片（由于RecycleView的缓冲导致可能加载错乱）
         GlideApp.with(fragment).clear(imageView);
         //加载图片
-        GlideApp.with(fragment).asBitmap().load(url).apply(getCommOptions()).into(imageView);
+        GlideApp.with(fragment).asBitmap().load(url).apply(getCommOptions()).fitCenter().into(imageView);
     }
 
     /**
@@ -37,7 +37,7 @@ public class GlideUtils {
         //清除之前imageView上的缓存图片（由于RecycleView的缓冲导致可能加载错乱）
         GlideApp.with(activity).clear(imageView);
         //加载图片
-        GlideApp.with(activity).asBitmap().load(url).apply(getCommOptions()).into(imageView);
+        GlideApp.with(activity).asBitmap().load(url).apply(getCommOptions()).fitCenter().into(imageView);
     }
 
     /**
@@ -48,7 +48,7 @@ public class GlideUtils {
         //清除之前imageView上的缓存图片（由于RecycleView的缓冲导致可能加载错乱）
         GlideApp.with(context).clear(imageView);
         //加载图片
-        GlideApp.with(context).asBitmap().load(url).apply(getCommOptions()).override(w,h).into(imageView);
+        GlideApp.with(context).asBitmap().load(url).apply(getCommOptions()).override(w,h).fitCenter().into(imageView);
     }
 
 

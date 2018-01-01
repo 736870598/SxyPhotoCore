@@ -83,3 +83,12 @@
      *  @param context Context
      */
     public static void loadImage(Context context, String url, int w, int h, ImageView imageView)
+    
+## 把这些加在你的 app/build.gradle 中
+    
+     compile 'io.reactivex.rxjava2:rxjava:2.1.1'
+     compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
+     compile 'com.tbruyelle.rxpermissions2:rxpermissions:0.9.4@aar'
+     compile 'com.github.bumptech.glide:glide:4.0.0-RC0'
+     annotationProcessor 'com.github.bumptech.glide:compiler:4.0.0-RC0'
+    
