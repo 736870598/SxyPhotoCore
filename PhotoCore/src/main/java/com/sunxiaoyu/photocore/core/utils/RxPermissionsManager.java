@@ -3,8 +3,12 @@ package com.sunxiaoyu.photocore.core.utils;
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.os.Build;
 import android.provider.Settings;
+import android.support.annotation.RequiresApi;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 
 
@@ -24,7 +28,6 @@ public class RxPermissionsManager {
     private Activity activity;
     private PermissionDealListener listener;
     private String[] permissions;
-    private RxPermissions rxPermissions;
 
     private RxPermissionsManager(){}
 
@@ -48,7 +51,6 @@ public class RxPermissionsManager {
         this.activity = activity;
         this.listener = listener;
         this.permissions = permissions;
-        rxPermissions = new RxPermissions(activity);
         requestPermissions(permissions);
     }
 
@@ -58,7 +60,7 @@ public class RxPermissionsManager {
      */
     private void requestPermissions(String...permissions){
         for (String permission : permissions){
-            if (!rxPermissions.isGranted(permission)){
+            if(!PermissionIsGranted(permission)){
                 new RxPermissions(activity)
                         .requestEach(permissions)
                         .subscribe(new Consumer<Permission>() {
@@ -78,8 +80,16 @@ public class RxPermissionsManager {
         //执行到这一步说明申请权限已经同意了。
         activity = null;
         listener = null;
-        rxPermissions = null;
+    }
 
+    /**
+     * 判断权限是否已经授予
+     */
+    private boolean PermissionIsGranted(String permission){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            return ContextCompat.checkSelfPermission(activity, permission) == PackageManager.PERMISSION_GRANTED;
+        }
+        return true;
     }
 
     /**
@@ -132,7 +142,6 @@ public class RxPermissionsManager {
                 //执行到这一步说明用户已经不同意授权了。dialog消失说明用户点击了 前往开启 或者 不用了 按钮。
                 activity = null;
                 listener = null;
-                rxPermissions = null;
             }
         });
         dialog.show();
