@@ -1,9 +1,12 @@
-package com.sunxiaoyu.photocore.core.activityresult;
+package com.sunxiaoyu.photocore;
 
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.Intent;
+
+import com.sunxiaoyu.photocore.core.model.ActivityResultInfo;
+import com.sunxiaoyu.photocore.core.ui.SxySelectPhotoFragment;
 
 import io.reactivex.Observable;
 
@@ -13,7 +16,8 @@ import io.reactivex.Observable;
  */
 public class AvoidOnResult {
     private static final String TAG = "AvoidOnResult";
-    private AvoidOnResultFragment mAvoidOnResultFragment;
+    private SxySelectPhotoFragment mAvoidOnResultFragment;
+//    private AvoidOnResultFragment mAvoidOnResultFragment;
 
     public AvoidOnResult(Activity activity) {
         mAvoidOnResultFragment = getAvoidOnResultFragment(activity);
@@ -23,10 +27,10 @@ public class AvoidOnResult {
         this(fragment.getActivity());
     }
 
-    private AvoidOnResultFragment getAvoidOnResultFragment(Activity activity) {
-        AvoidOnResultFragment avoidOnResultFragment = findAvoidOnResultFragment(activity);
+    private SxySelectPhotoFragment getAvoidOnResultFragment(Activity activity) {
+        SxySelectPhotoFragment avoidOnResultFragment = findAvoidOnResultFragment(activity);
         if (avoidOnResultFragment == null) {
-            avoidOnResultFragment = new AvoidOnResultFragment();
+            avoidOnResultFragment = new SxySelectPhotoFragment();
             FragmentManager fragmentManager = activity.getFragmentManager();
             fragmentManager
                     .beginTransaction()
@@ -37,8 +41,8 @@ public class AvoidOnResult {
         return avoidOnResultFragment;
     }
 
-    private AvoidOnResultFragment findAvoidOnResultFragment(Activity activity) {
-        return (AvoidOnResultFragment) activity.getFragmentManager().findFragmentByTag(TAG);
+    private SxySelectPhotoFragment findAvoidOnResultFragment(Activity activity) {
+        return (SxySelectPhotoFragment) activity.getFragmentManager().findFragmentByTag(TAG);
     }
 
     public Observable<ActivityResultInfo> startForResult(Intent intent, int requestCode) {

@@ -47,6 +47,7 @@ public class SxyUtilsManager {
         act.startActivityForResult(intent, requestCode);
     }
 
+
     /**
      * 拍照
      * @param act           activity
