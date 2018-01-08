@@ -103,6 +103,7 @@ public class SxyUtilsManager {
     /**
      * 申请权限
      * @param act           activity
+     * @param permissions   请求的权限
      * @return  RxJava使用Observable
      */
     public Observable<Integer> requestPermissions(Activity act, String...permissions){
@@ -214,18 +215,6 @@ public class SxyUtilsManager {
      */
     private Observable<ActivityResultInfo> startForResult(Activity act, int requestCode, TypeEnum typeEnum, Intent intent){
         return new ActivityResult(act, typeEnum).startForResult(intent, requestCode);
-    }
-
-    /**
-     * 申请权限
-     * 最好放在onstart中请求。。。。
-     *
-     * @param activity      activity
-     * @param listener      权限处理结果，未授权会重复请求，授权通过该回调传出
-     * @param permissions   申请的权限 ps: Manifest.permission.WRITE_EXTERNAL_STORAGE
-     */
-    public void requestPermissions(Activity activity, RxPermissionsManager.PermissionDealListener listener, String...permissions){
-        RxPermissionsManager.getManager().requestPermissions(activity, listener, permissions);
     }
 
 }
