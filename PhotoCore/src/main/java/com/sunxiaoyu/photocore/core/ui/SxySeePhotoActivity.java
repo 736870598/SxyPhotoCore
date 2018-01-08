@@ -11,7 +11,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.TextView;
 
-import com.sunxiaoyu.photocore.PhotoConfig;
+import com.sunxiaoyu.photocore.core.PhotoConfig;
 import com.sunxiaoyu.photocore.R;
 import com.sunxiaoyu.photocore.core.view.ImageItemFragment;
 

@@ -1,4 +1,4 @@
-package com.sunxiaoyu.photocore;
+package com.sunxiaoyu.photocore.core;
 
 import android.app.Activity;
 import android.content.Context;
@@ -7,6 +7,7 @@ import android.widget.ImageView;
 
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
+import com.sunxiaoyu.photocore.R;
 import com.sunxiaoyu.photocore.core.gilde.GlideApp;
 
 /**
@@ -19,30 +20,26 @@ import com.sunxiaoyu.photocore.core.gilde.GlideApp;
 public class GlideUtils {
 
     /**
-     *  加载图片
-     *  @param fragment Fragment
+     * 加载图片
+     * @param context       上下文
+     * @param url           图片地址
+     * @param imageView     imageView
      */
-    public static void loadImage(Fragment fragment, String url, ImageView imageView){
+    public static void loadImage(Context context, String url, ImageView imageView){
         //清除之前imageView上的缓存图片（由于RecycleView的缓冲导致可能加载错乱）
-        GlideApp.with(fragment).clear(imageView);
+        GlideApp.with(context).clear(imageView);
         //加载图片
-        GlideApp.with(fragment).asBitmap().load(url).apply(getCommOptions()).fitCenter().into(imageView);
+        GlideApp.with(context).asBitmap().load(url).apply(getCommOptions()).fitCenter().into(imageView);
     }
 
-    /**
-     *  加载图片
-     * @param activity  Activity
-     */
-    public static void loadImage(Activity activity, String url, ImageView imageView){
-        //清除之前imageView上的缓存图片（由于RecycleView的缓冲导致可能加载错乱）
-        GlideApp.with(activity).clear(imageView);
-        //加载图片
-        GlideApp.with(activity).asBitmap().load(url).apply(getCommOptions()).fitCenter().into(imageView);
-    }
 
     /**
-     *  加载图片
-     *  @param context Context
+     * 加载图片
+     * @param context       上下文
+     * @param url           图片地址
+     * @param w             图片显示宽度
+     * @param h             图片显示高度
+     * @param imageView     imageView
      */
     public static void loadImage(Context context, String url, int w, int h, ImageView imageView){
         //清除之前imageView上的缓存图片（由于RecycleView的缓冲导致可能加载错乱）

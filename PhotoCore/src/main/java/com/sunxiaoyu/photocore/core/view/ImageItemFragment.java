@@ -9,7 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-import com.sunxiaoyu.photocore.GlideUtils;
+import com.sunxiaoyu.photocore.core.GlideUtils;
 import com.sunxiaoyu.photocore.core.photoview.PhotoView;
 import com.sunxiaoyu.photocore.core.photoview.PhotoViewAttacher;
 
@@ -32,7 +32,7 @@ public class ImageItemFragment extends Fragment implements  PhotoViewAttacher.IS
             photoView.setScaleType(ImageView.ScaleType.FIT_CENTER);
         }
         String photoPath = getArguments().getString("photoPath");
-        GlideUtils.loadImage(this, photoPath, photoView);
+        GlideUtils.loadImage(getContext(), photoPath, photoView);
 
 
         return photoView;

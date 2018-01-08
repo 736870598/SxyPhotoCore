@@ -1,4 +1,4 @@
-package com.sunxiaoyu.photocore;
+package com.sunxiaoyu.photocore.core;
 
 /**
  * config
