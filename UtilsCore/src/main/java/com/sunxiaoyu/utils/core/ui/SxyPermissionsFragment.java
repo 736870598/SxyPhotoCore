@@ -30,9 +30,10 @@ import io.reactivex.subjects.PublishSubject;
 public class SxyPermissionsFragment extends SxyBaseFragment {
 
     private ArrayList<String> list;
-    private PublishSubject<Integer> mSubject;
+    private PublishSubject<Boolean> mSubject;
     private AlertDialog dialog;
     private Disposable disposable;
+    private boolean isApplying;
 
     public SxyPermissionsFragment(){}
 
@@ -46,6 +47,12 @@ public class SxyPermissionsFragment extends SxyBaseFragment {
     public void onStart() {
         super.onStart();
         Observable.just("onStart")
+                .filter(new Predicate<String>() {
+                    @Override
+                    public boolean test(String s) throws Exception {
+                        return !isApplying;
+                    }
+                })
                 .filter(new Predicate<String>() {
                     @Override
                     public boolean test(String s) throws Exception {
@@ -74,9 +81,10 @@ public class SxyPermissionsFragment extends SxyBaseFragment {
     }
 
     @Override
-    public Observable<Integer> requestPermissions(final String...permissions){
+    public Observable<Boolean> requestPermissions(final String...permissions){
         if(mSubject != null) mSubject.onComplete();
         mSubject = PublishSubject.create();
+        isApplying = false;
 
         return mSubject.doOnSubscribe(new Consumer<Disposable>() {
             @Override
@@ -92,15 +100,16 @@ public class SxyPermissionsFragment extends SxyBaseFragment {
      */
     private void applyPermissions(){
         if (list.isEmpty()){
-            mSubject.onNext(PackageManager.PERMISSION_GRANTED);
+            mSubject.onNext(true);
             onComplete();
         }else{
             String[] deniedPermissions = new String[list.size()];
             list.toArray(deniedPermissions);
             if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M){
-                mSubject.onNext(PackageManager.PERMISSION_GRANTED);
+                mSubject.onNext(true);
                 onComplete();
             }else{
+                isApplying = true;
                 requestPermissions(deniedPermissions, 100);
             }
 
@@ -112,11 +121,12 @@ public class SxyPermissionsFragment extends SxyBaseFragment {
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode != 100){
-            mSubject.onNext(PackageManager.PERMISSION_DENIED);
+            mSubject.onNext(false);
             onComplete();
             return ;
         }
 
+        isApplying = false;
         int size = Math.min(permissions.length, grantResults.length);
         for (int i = 0; i < size; i++){
             if (grantResults[i] == PackageManager.PERMISSION_DENIED){
@@ -136,7 +146,7 @@ public class SxyPermissionsFragment extends SxyBaseFragment {
             }
         }
 
-        mSubject.onNext(PackageManager.PERMISSION_GRANTED);
+        mSubject.onNext(true);
         onComplete();
     }
 
@@ -154,7 +164,7 @@ public class SxyPermissionsFragment extends SxyBaseFragment {
                 .setNegativeButton("不用了", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        mSubject.onNext(PackageManager.PERMISSION_DENIED);
+                        mSubject.onNext(false);
                         onComplete();
                         dialog.dismiss();
                     }
@@ -184,7 +194,7 @@ public class SxyPermissionsFragment extends SxyBaseFragment {
 
     private void doSomethingStart(String[] permissions) {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M){
-            mSubject.onNext(PackageManager.PERMISSION_GRANTED);
+            mSubject.onNext(true);
             mSubject.onComplete();
             return;
         }

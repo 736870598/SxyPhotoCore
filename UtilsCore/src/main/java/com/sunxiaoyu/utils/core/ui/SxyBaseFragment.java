@@ -100,7 +100,7 @@ public abstract class SxyBaseFragment extends Fragment {
         mCallback = null;
     }
 
-    public Observable<Integer> requestPermissions(final String...permissions){
+    public Observable<Boolean> requestPermissions(final String...permissions){
         return null;
     }
 

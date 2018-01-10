@@ -31,7 +31,7 @@ public class ActivityResult {
         return fragment.startForResult(intent, requestCode);
     }
 
-    public Observable<Integer> requestPermissions(String...permissions) {
+    public Observable<Boolean> requestPermissions(String...permissions) {
         return fragment.requestPermissions(permissions);
     }
 

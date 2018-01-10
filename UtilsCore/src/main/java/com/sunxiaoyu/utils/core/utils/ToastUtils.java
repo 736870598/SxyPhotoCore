@@ -17,7 +17,7 @@ public class ToastUtils {
     private static Toast toast;
     private static TextView view;
 
-    public static void setShortToast(Context context, String text) {
+    public static void showToast(Context context, String text) {
         if (StringUtils.isNull(text)) {
             return;
         }
