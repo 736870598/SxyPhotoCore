@@ -79,9 +79,7 @@
      * 申请权限 （直到用户做出最终选择。 《同意》 或 《点击了不再询问并拒绝了，而且还不去设置界面设置》）
      * @param act           activity
      * @param permissions   请求的权限
-     * @return  RxJava使用Observable
-     *              PackageManager.PERMISSION_GRANTED   有权限 （同意）
-     *              PackageManager.PERMISSION_DENIED    没有权限（点击了不再询问并拒绝了，而且还不去设置界面设置）
+     * @return  RxJava使用Observable   true 有权限  false 没有权限
      */
     public Observable<Integer> requestPermissions(Activity act, String...permissions){
         return new ActivityResult(act, TypeEnum.TYPE_APPLY_PERMISSION).requestPermissions(permissions);
