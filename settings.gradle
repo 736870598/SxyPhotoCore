@@ -1,1 +1,1 @@
-include ':app', ':PhotoCore'
+include ':app', ':UtilsCore'

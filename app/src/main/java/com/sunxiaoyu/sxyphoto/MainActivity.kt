@@ -9,10 +9,8 @@ import android.os.Environment
 import android.util.Log
 import android.view.View
 import android.widget.ImageView
-import com.sunxiaoyu.photocore.core.PhotoConfig
-import com.sunxiaoyu.photocore.SxyUtilsManager
-import java.security.Permission
-import java.security.Permissions
+import com.sunxiaoyu.utils.UtilsCore
+import com.sunxiaoyu.utils.core.PhotoConfig
 
 class MainActivity : AppCompatActivity() {
 
@@ -24,9 +22,10 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
     }
 
+    // 拍照
     fun takePhoto(view: View) {
         val savePath = "${Environment.getExternalStorageDirectory().absolutePath}/sunxyPhoto/${System.currentTimeMillis()}.jpg"
-        SxyUtilsManager.getManager()
+        UtilsCore.manager()
                 .takePicture(this, 10088, true, savePath)
                 .subscribe {
                     Log.v("sunxy", it.toString())
@@ -37,9 +36,10 @@ class MainActivity : AppCompatActivity() {
                 }
     }
 
+    // 图库选照
     fun selectPhoto(view: View) {
         val savePath = "${Environment.getExternalStorageDirectory().absolutePath}/sunxyPhoto/${System.currentTimeMillis()}.jpg"
-        SxyUtilsManager.getManager()
+        UtilsCore.manager()
                 .selectPicture(this, 10086, true, savePath)
                 .subscribe {
                     Log.v("sunxy", it.toString())
@@ -50,17 +50,11 @@ class MainActivity : AppCompatActivity() {
                 }
     }
 
-    fun setImage(path: String) {
-        imageView.setImageBitmap(BitmapFactory.decodeFile(path))
-        imageView.setOnClickListener {
-            SxyUtilsManager.getManager().seePhoto(this, path)
-        }
-    }
-
+    // 跳转界面
     fun startA(view: View) {
         val intent = Intent(this, SecondActivity::class.java)
         intent.putExtra("n", "------------------------------------------9999990909090")
-        SxyUtilsManager.getManager().startForResult(this, 10022, intent)
+        UtilsCore.manager().startForResult(this, 10022, intent)
                 .subscribe {
                     Log.v("sunxy", it.toString())
                     if (it.success()) {
@@ -70,10 +64,19 @@ class MainActivity : AppCompatActivity() {
                 }
     }
 
+    // 申请权限
     fun apply(view: View){
-        SxyUtilsManager.getManager().requestPermissions(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+        UtilsCore.manager().requestPermissions(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
                 .subscribe {
                     Log.v("sunxy", it.toString())
                 }
+    }
+
+    // 查看图片
+    fun setImage(path: String) {
+        imageView.setImageBitmap(BitmapFactory.decodeFile(path))
+        imageView.setOnClickListener {
+            UtilsCore.manager().seePhoto(this, path)
+        }
     }
 }

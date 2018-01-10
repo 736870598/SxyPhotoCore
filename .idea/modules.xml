@@ -2,11 +2,14 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/PhotoCore/PhotoCore.iml" filepath="$PROJECT_DIR$/PhotoCore/PhotoCore.iml" />
+      <module fileurl="file://D:\as_space\github_space\SxyUtilsCore\PhotoCore\PhotoCore.iml" filepath="D:\as_space\github_space\SxyUtilsCore\PhotoCore\PhotoCore.iml" />
       <module fileurl="file://D:\android\workspace\github_space\SxyPhoto\PhotoCore\PhotoModule.iml" filepath="D:\android\workspace\github_space\SxyPhoto\PhotoCore\PhotoModule.iml" />
       <module fileurl="file://D:\as_space\github_space\SxyPhotoCore\SxyPhoto.iml" filepath="D:\as_space\github_space\SxyPhotoCore\SxyPhoto.iml" />
-      <module fileurl="file://$PROJECT_DIR$/SxyPhotoCore.iml" filepath="$PROJECT_DIR$/SxyPhotoCore.iml" />
+      <module fileurl="file://D:\as_space\github_space\SxyUtilsCore\SxyPhotoCore.iml" filepath="D:\as_space\github_space\SxyUtilsCore\SxyPhotoCore.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/SxyUtilsCore.iml" filepath="$PROJECT_DIR$/.idea/SxyUtilsCore.iml" />
+      <module fileurl="file://$PROJECT_DIR$/UtilsCore/UtilsCore.iml" filepath="$PROJECT_DIR$/UtilsCore/UtilsCore.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://D:\as_space\github_space\SxyUtilsCore\app\app.iml" filepath="D:\as_space\github_space\SxyUtilsCore\app\app.iml" />
     </modules>
   </component>
 </project>
