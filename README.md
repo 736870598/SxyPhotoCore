@@ -179,7 +179,11 @@
 
     SystemUtils 系统相关的工具类
 
-    Chinese2PyUtils 汉子转拼音攻工具类
+    Chinese2PyUtils 汉子转拼音工具类
+    
+    DialogUtils Dialog工具类
+    
+    LogUtils Log日志相关工具类
 
     等等。。。
     

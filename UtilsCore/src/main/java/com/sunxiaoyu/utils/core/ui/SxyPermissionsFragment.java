@@ -13,6 +13,8 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 
 
+import com.sunxiaoyu.utils.core.utils.DialogUtils;
+
 import java.util.ArrayList;
 
 import io.reactivex.Observable;
@@ -157,29 +159,22 @@ public class SxyPermissionsFragment extends SxyBaseFragment {
         if (dialog != null && dialog.isShowing()){
             return;
         }
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity())
-                .setTitle("提示")
-                .setMessage("缺少使用该功能的必要权限，请前往开启")
-                .setCancelable(false)
-                .setNegativeButton("不用了", new DialogInterface.OnClickListener() {
+        DialogUtils.showSelectDialog(getActivity(), "缺少使用该功能的必要权限，请前往开启",
+                "前往开启", new DialogInterface.OnClickListener() {
                     @Override
-                    public void onClick(DialogInterface dialog, int which) {
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        startAppSettings();
+                        dialog.dismiss();
+                    }
+                },
+                "不用了", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
                         mSubject.onNext(false);
                         onComplete();
                         dialog.dismiss();
                     }
-                })
-                .setPositiveButton("前往开启", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        startAppSettings();
-                        dialog.dismiss();
-                    }
                 });
-        dialog = builder.create();
-        dialog.setCancelable(false);
-        dialog.setCanceledOnTouchOutside(false);
-        dialog.show();
     }
 
     /**
