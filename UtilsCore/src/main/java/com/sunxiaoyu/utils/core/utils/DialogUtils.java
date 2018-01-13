@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.widget.EditText;
 
 
 /**
@@ -59,8 +60,8 @@ public class DialogUtils {
      * @param cancelListener    取消文案监听
      */
     public static void showSelectDialog(Context context, String msg,
-                                    String sureStr, DialogInterface.OnClickListener sureListener,
-                                    String cancelStr, DialogInterface.OnClickListener cancelListener){
+                                        String sureStr, DialogInterface.OnClickListener sureListener,
+                                        String cancelStr, DialogInterface.OnClickListener cancelListener){
         showSelectDialog(context, msg, sureStr, sureListener, cancelStr, cancelListener, false, false);
     }
 
@@ -76,8 +77,8 @@ public class DialogUtils {
      * @param isOne             是否是一个按钮（是否不显示取消按钮）
      */
     public static void showSelectDialog(Context context, String msg,
-                                       String sureStr, DialogInterface.OnClickListener sureListener,
-                                       String cancelStr, DialogInterface.OnClickListener cancelListener, boolean canCancel, boolean isOne){
+                                        String sureStr, DialogInterface.OnClickListener sureListener,
+                                        String cancelStr, DialogInterface.OnClickListener cancelListener, boolean canCancel, boolean isOne){
 
         dismiss();
         AlertDialog.Builder builder = new AlertDialog.Builder(context)
@@ -104,6 +105,36 @@ public class DialogUtils {
         dialog.setCanceledOnTouchOutside(canCancel);
         dialog.show();
     }
+
+    public static void showEditDialog(Context context, String title, final EditListener listener){
+        final EditText et = new EditText(context);
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(context).setTitle(title)
+                .setView(et)
+                .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        if (listener != null){
+                            String input = et.getText().toString();
+                            listener.onInputText(et, input);
+                        }else{
+                            SystemUtils.hideSoftKeyboard(et);
+                            dismiss();
+                        }
+                    }
+                })
+                .setNegativeButton("取消", null);
+
+        dialog = builder.create();
+        dialog.setCancelable(false);
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.show();
+    }
+
+    public interface EditListener{
+        void onInputText(EditText editText, String str);
+    }
+
+
 
 
 

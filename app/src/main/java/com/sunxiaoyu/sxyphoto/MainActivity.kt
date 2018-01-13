@@ -11,6 +11,7 @@ import android.view.View
 import android.widget.ImageView
 import com.sunxiaoyu.utils.UtilsCore
 import com.sunxiaoyu.utils.core.PhotoConfig
+import com.sunxiaoyu.utils.core.utils.DialogUtils
 
 class MainActivity : AppCompatActivity() {
 
@@ -24,16 +25,19 @@ class MainActivity : AppCompatActivity() {
 
     // 拍照
     fun takePhoto(view: View) {
-        val savePath = "${Environment.getExternalStorageDirectory().absolutePath}/sunxyPhoto/${System.currentTimeMillis()}.jpg"
-        UtilsCore.manager()
-                .takePicture(this, 10088, true, savePath)
-                .subscribe {
-                    Log.v("sunxy", it.toString())
-                    if (it.success()) {
-                        val path = it.data.getStringExtra(PhotoConfig.RESULT_PHOTO_PATH)
-                        setImage(path)
-                    }
-                }
+        DialogUtils.showEditDialog(this, "请输入标签名"){_,_ ->
+
+        }
+//        val savePath = "${Environment.getExternalStorageDirectory().absolutePath}/sunxyPhoto/${System.currentTimeMillis()}.jpg"
+//        UtilsCore.manager()
+//                .takePicture(this, 10088, true, savePath)
+//                .subscribe {
+//                    Log.v("sunxy", it.toString())
+//                    if (it.success()) {
+//                        val path = it.data.getStringExtra(PhotoConfig.RESULT_PHOTO_PATH)
+//                        setImage(path)
+//                    }
+//                }
     }
 
     // 图库选照

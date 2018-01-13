@@ -11,13 +11,14 @@ import android.os.Environment;
 import android.provider.DocumentsContract;
 import android.provider.MediaStore;
 import android.support.v4.content.FileProvider;
-import android.util.Log;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 
 /**
  * 文件工具类
@@ -173,6 +174,57 @@ public class FileUtils {
         return null;
     }
 
+
+    /**
+     * copy文件
+     * @param oldPath   原路径
+     * @param newPath   要拷贝到的路径
+     * @return  -1 失败  否则为文件大小
+     */
+    public static int copyFile(String oldPath, String newPath){
+        File oldFile = new File(oldPath);
+        if (!oldFile.exists()){
+            return -1;
+        }
+        File newFile = new File(newPath);
+        if (!newFile.exists()){
+            FileUtils.createFile(newFile.getParentFile().getAbsolutePath(), newFile.getName());
+        }
+
+        InputStream inputStream = null;
+        OutputStream outputStream = null;
+        try {
+            inputStream = new FileInputStream(oldPath);
+            outputStream = new FileOutputStream(newPath);
+            byte[] buffer = new byte[1024];
+            int byteSum = 0 , byteRead;
+            while ( (byteRead = inputStream.read(buffer)) != -1) {
+                byteSum += byteRead;
+                outputStream.write(buffer, 0, byteRead);
+            }
+            outputStream.flush();
+            return byteSum;
+        }catch (Exception e){
+            e.printStackTrace();
+            return  -1;
+        }finally {
+            if (inputStream != null){
+                try {
+                    inputStream.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (outputStream != null){
+                try {
+                    outputStream.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
     /**
      * 删除文件
      */
@@ -192,6 +244,7 @@ public class FileUtils {
                 for (File file1: listFiles){
                     delFile(file1);
                 }
+                file.delete();
             }
         }
     }
