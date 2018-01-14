@@ -97,29 +97,27 @@ public class FileUtils {
 
     /**
      * 读文件
-     * @param context   上下文
      * @param path      读取文件路径
      * @param name      读取文件名字
      * @return 文件内容 utf-8
      */
-    public static String readFile(Context context, String path, String name){
-        return readFile(context, new File(path, name));
+    public static String readFile(String path, String name){
+        return readFile( new File(path, name));
     }
 
     /**
      * 读文件
-     * @param context   上下文
      * @param file      读取文件
      * @return 文件内容 utf-8
      */
-    public static String readFile(Context context, File file){
+    public static String readFile(File file){
         if (!file.exists()){
             return null;
         }
 
         FileInputStream inputStream = null;
         try {
-            inputStream = context.openFileInput(file.getAbsolutePath());
+            inputStream = new FileInputStream(file);
             byte temp[] = new byte[1024];
             StringBuilder sb = new StringBuilder("");
             int len;
