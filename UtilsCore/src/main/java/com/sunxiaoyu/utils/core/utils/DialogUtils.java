@@ -106,9 +106,16 @@ public class DialogUtils {
         dialog.show();
     }
 
+    /**
+     * 显示可编辑的Dialog
+     * @param context   上下文
+     * @param title     title
+     * @param listener  确定监听器
+     */
     public static void showEditDialog(Context context, String title, final EditListener listener){
-        final EditText et = new EditText(context);
+        dismiss();
 
+        final EditText et = new EditText(context);
         AlertDialog.Builder builder = new AlertDialog.Builder(context).setTitle(title)
                 .setView(et)
                 .setPositiveButton("确定", new DialogInterface.OnClickListener() {
@@ -130,12 +137,27 @@ public class DialogUtils {
         dialog.show();
     }
 
-    public interface EditListener{
-        void onInputText(EditText editText, String str);
+
+    /**
+     * 显示多选的Dialog
+     * @param context   上下文
+     * @param title     title
+     * @param items     选项
+     * @param listener  监听器
+     */
+    public static void showMoreSelectDialog(Context context, String title, String[] items, DialogInterface.OnClickListener listener){
+        dismiss();
+        AlertDialog.Builder builder = new AlertDialog.Builder(context).setTitle(title)
+                .setSingleChoiceItems(items, -1, listener);
+        dialog = builder.create();
+        dialog.setCancelable(true);
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.show();
     }
 
 
-
-
+    public interface EditListener{
+        void onInputText(EditText editText, String str);
+    }
 
 }
