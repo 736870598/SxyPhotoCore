@@ -30,7 +30,7 @@
                     android:name="android.support.v4.content.FileProvider"
                     android:authorities="包名.fileprovider"
                     android:grantUriPermissions="true"
-                    android:exported="false">
+                    android:exported="true">
                     <meta-data
                         android:name="android.support.FILE_PROVIDER_PATHS"
                         android:resource="@xml/file_paths" />
