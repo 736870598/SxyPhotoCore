@@ -8,9 +8,37 @@
     
         <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
         
+        拍照的话涉及到path转uri，在Android 7。0以后请动态申请保存路径，类似如下：
+        
+        在res下创建xml文件夹，创建file_paths.xml文件，内容类似如下：
+        
+        <?xml version="1.0" encoding="utf-8"?>
+        <paths>
+            <!--Environment.getExternalStorageDirectory()-->
+            <external-path path="sunxyPhoto" name="external_root" />
+        
+            <!--Context.getExternalFilesDir()-->
+            <external-files-path path="info" name="files_root" />
+        
+            <!--Context.getExternalCacheDir()-->
+            <external-cache-path path="imageCache" name="cache_root" />
+        </paths>
+        
+        在清单文件中生明：
+        
+                <provider
+                    android:name="android.support.v4.content.FileProvider"
+                    android:authorities="包名.fileprovider"
+                    android:grantUriPermissions="true"
+                    android:exported="false">
+                    <meta-data
+                        android:name="android.support.FILE_PROVIDER_PATHS"
+                        android:resource="@xml/file_paths" />
+                </provider>
+            
+        
 2. 加载图片使用的是Gilde框架，默认缓存保存在context.getExternalCacheDir()/imageCache, 默认磁盘缓冲最大为100M，在7.0以上请在xm中声明该文件的使用权
  
-        <external-cache-path path="imageCache" name="cache_root" />
 
 3. 请务必在主module的build.gradle中引入：
 
