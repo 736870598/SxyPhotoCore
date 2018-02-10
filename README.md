@@ -212,6 +212,8 @@
     DialogUtils Dialog工具类
     
     LogUtils Log日志相关工具类
+    
+    MD5Utils 获取签名文件信息工具类
 
     等等。。。
     
