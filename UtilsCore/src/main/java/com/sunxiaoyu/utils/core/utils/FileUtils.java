@@ -54,30 +54,28 @@ public class FileUtils {
 
     /**
      *
-     * @param context   上下文
      * @param path      文件路径
      * @param name      文件名称
      * @param writeStr  写入字符串
      * @param isCover   是否覆盖写入
      */
-    public static void writeFile(Context context, String path, String name, String writeStr, boolean isCover){
-        writeFile(context, createFile(path, name), writeStr, isCover);
+    public static void writeFile(String path, String name, String writeStr, boolean isCover){
+        writeFile(createFile(path, name), writeStr, isCover);
     }
 
     /**
      * 写文件
-     * @param context   上下文
      * @param file      文件
      * @param writeStr  写入字符串
      * @param isCover   是否覆盖写入
      */
-    public static void writeFile(Context context, File file, String writeStr, boolean isCover){
+    public static void writeFile(File file, String writeStr, boolean isCover){
         if (file == null || writeStr == null){
             return;
         }
         FileOutputStream outputStream = null;
         try {
-            outputStream = context.openFileOutput(file.getAbsolutePath(), isCover ? Context.MODE_PRIVATE : Context.MODE_APPEND);
+            outputStream =  new FileOutputStream(file, !isCover);
             outputStream.write(writeStr.getBytes("utf-8"));
             outputStream.flush();
         } catch (FileNotFoundException e) {
@@ -169,7 +167,7 @@ public class FileUtils {
                 e.printStackTrace();
             }
         }
-        return null;
+        return file;
     }
 
 
