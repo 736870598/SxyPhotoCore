@@ -82,8 +82,6 @@ public class SxySeePhotoActivity extends AppCompatActivity implements ViewPager.
     }
 
 
-
-
     class ViewPagerAdapter extends FragmentPagerAdapter {
 
         private ArrayList<String> pathList;
@@ -106,6 +104,5 @@ public class SxySeePhotoActivity extends AppCompatActivity implements ViewPager.
             fragment.setArguments(bundle);
             return fragment;
         }
-
     }
 }

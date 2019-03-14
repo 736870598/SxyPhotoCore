@@ -45,7 +45,7 @@ public class SxyPermissionsFragment extends SxyBaseFragment {
     @Override
     public void onStart() {
         super.onStart();
-        Observable.just("onStart")
+        disposable = Observable.just("onStart")
                 .filter(new Predicate<String>() {
                     @Override
                     public boolean test(String s) throws Exception {
@@ -104,14 +104,13 @@ public class SxyPermissionsFragment extends SxyBaseFragment {
         }else{
             String[] deniedPermissions = new String[list.size()];
             list.toArray(deniedPermissions);
-            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M){
-                mSubject.onNext(true);
-                onComplete();
-            }else{
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
                 isApplying = true;
                 requestPermissions(deniedPermissions, 100);
+            }else{
+                mSubject.onNext(true);
+                onComplete();
             }
-
         }
     }
 

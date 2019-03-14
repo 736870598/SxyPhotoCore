@@ -3,15 +3,11 @@ package com.sunxiaoyu.utils;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.widget.ImageView;
 
 import com.sunxiaoyu.utils.core.ActivityResult;
-import com.sunxiaoyu.utils.core.GlideUtils;
 import com.sunxiaoyu.utils.core.PhotoConfig;
 import com.sunxiaoyu.utils.core.model.ActivityResultInfo;
 import com.sunxiaoyu.utils.core.model.TypeEnum;
-import com.sunxiaoyu.utils.core.utils.JpegBmpUtils;
 import com.sunxiaoyu.utils.core.ui.SxySeePhotoActivity;
 
 import java.util.ArrayList;
@@ -39,33 +35,15 @@ public class UtilsCore {
         static UtilsCore instance = new UtilsCore();
     }
 
-    /**
-     * 选择照片
-     * @param act           activity
-     * @param requestCode   请求code
-     * @param needCompress  是否需要压缩
-     * @param savePath      压缩后保存路径
-     * @param callback      照片选择后回调函数
-     */
-    public void selectPicture(Activity act, int requestCode, boolean needCompress, String savePath,  ActivityResult.Callback callback){
-        Intent intent = new Intent();
-        intent.putExtra(PhotoConfig.NEED_COMPRESS, needCompress);
-        intent.putExtra(PhotoConfig.SAVE_PATH, savePath);
-        startForResult(act, requestCode, TypeEnum.TYPE_SELECT_PICTURE, intent, callback);
-    }
 
     /**
      * 选择照片
      * @param act           activity
      * @param requestCode   请求code
-     * @param needCompress  是否需要压缩
-     * @param savePath      压缩后保存路径
      * @return  RxJava使用Observable
      */
-    public Observable<ActivityResultInfo> selectPicture(Activity act, int requestCode, boolean needCompress, String savePath){
+    public Observable<ActivityResultInfo> selectPicture(Activity act, int requestCode){
         Intent intent = new Intent();
-        intent.putExtra(PhotoConfig.NEED_COMPRESS, needCompress);
-        intent.putExtra(PhotoConfig.SAVE_PATH, savePath);
         return startForResult(act, requestCode, TypeEnum.TYPE_SELECT_PICTURE, intent);
     }
 
@@ -73,13 +51,11 @@ public class UtilsCore {
      * 拍照
      * @param act           activity
      * @param requestCode   请求code
-     * @param needCompress  是否需要压缩
      * @param savePath      压缩后保存路径
      * @param callback      照片选择后回调函数
      */
-    public void takePicture(Activity act, int requestCode, boolean needCompress, String savePath,  ActivityResult.Callback callback){
+    public void takePicture(Activity act, int requestCode, String savePath,  ActivityResult.Callback callback){
         Intent intent = new Intent();
-        intent.putExtra(PhotoConfig.NEED_COMPRESS, needCompress);
         intent.putExtra(PhotoConfig.SAVE_PATH, savePath);
         startForResult(act, requestCode, TypeEnum.TYPE_TAKE_PICTURE, intent, callback);
     }
@@ -88,13 +64,11 @@ public class UtilsCore {
      * 拍照
      * @param act           activity
      * @param requestCode   请求code
-     * @param needCompress  是否需要压缩
      * @param savePath      压缩后保存路径
      * @return  RxJava使用Observable
      */
-    public Observable<ActivityResultInfo> takePicture(Activity act, int requestCode, boolean needCompress, String savePath){
+    public Observable<ActivityResultInfo> takePicture(Activity act, int requestCode,  String savePath){
         Intent intent = new Intent();
-        intent.putExtra(PhotoConfig.NEED_COMPRESS, needCompress);
         intent.putExtra(PhotoConfig.SAVE_PATH, savePath);
         return startForResult(act, requestCode, TypeEnum.TYPE_TAKE_PICTURE, intent);
     }
@@ -157,39 +131,6 @@ public class UtilsCore {
         context.startActivity(intent);
     }
 
-    /**
-     * 压缩图片
-     * @param bitmap    图片
-     * @param savePath  保存路径
-     * @param quality   压缩质量（默认30%）
-     */
-    public void compress(Bitmap bitmap, String savePath, int quality){
-        JpegBmpUtils.compressBmp(bitmap, savePath, quality);
-        if (bitmap.isRecycled())
-            bitmap.recycle();
-    }
-
-    /**
-     * 加载图片
-     * @param context       上下文
-     * @param url           图片地址
-     * @param imageView     imageView
-     */
-    public void loadImage(Context context, String url, ImageView imageView){
-        GlideUtils.loadImage(context, url, imageView);
-    }
-
-    /**
-     * 加载图片
-     * @param context       上下文
-     * @param url           图片地址
-     * @param w             图片显示宽度
-     * @param h             图片显示高度
-     * @param imageView     imageView
-     */
-    public void loadImage(Context context, String url, int w, int h, ImageView imageView){
-        GlideUtils.loadImage(context, url, w, h, imageView);
-    }
 
 
     /**

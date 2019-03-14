@@ -1,1 +1,1 @@
-include ':app', ':UtilsCore'
+include ':app', ':UtilsCore', ':testmodule'

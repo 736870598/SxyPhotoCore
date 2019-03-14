@@ -16,7 +16,7 @@ import com.sunxiaoyu.utils.core.utils.DialogUtils
 class MainActivity : AppCompatActivity() {
 
 
-    val imageView: ImageView by lazy { findViewById(R.id.imageView) as ImageView }
+    val imageView: ImageView by lazy { findViewById<ImageView>(R.id.imageView) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

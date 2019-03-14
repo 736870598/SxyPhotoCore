@@ -9,7 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-import com.sunxiaoyu.utils.core.GlideUtils;
+import com.bumptech.glide.Glide;
 import com.sunxiaoyu.utils.core.photoview.PhotoView;
 import com.sunxiaoyu.utils.core.photoview.PhotoViewAttacher;
 
@@ -18,7 +18,7 @@ import com.sunxiaoyu.utils.core.photoview.PhotoViewAttacher;
  * @date: 2017/12/13
  */
 
-public class ImageItemFragment extends Fragment implements  PhotoViewAttacher.ISingleTop{
+public class ImageItemFragment extends Fragment implements PhotoViewAttacher.ISingleTop{
 
     private PhotoView photoView;
 
@@ -32,8 +32,7 @@ public class ImageItemFragment extends Fragment implements  PhotoViewAttacher.IS
             photoView.setScaleType(ImageView.ScaleType.FIT_CENTER);
         }
         String photoPath = getArguments().getString("photoPath");
-        GlideUtils.loadImage(getContext(), photoPath, photoView);
-
+        Glide.with(this).load(photoPath).into(photoView);
 
         return photoView;
     }

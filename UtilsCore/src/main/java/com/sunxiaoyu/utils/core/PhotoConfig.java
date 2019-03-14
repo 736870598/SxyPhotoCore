@@ -9,8 +9,6 @@ public class PhotoConfig {
     /**
      * 本module中使用
      */
-    //是否需要压缩
-    public static final String NEED_COMPRESS = "needCompress";
     //保存路径
     public static final String SAVE_PATH = "savePath";
     //是否查看单张照片

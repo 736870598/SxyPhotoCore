@@ -27,7 +27,7 @@ public class ActivityResult {
         this(fragment.getActivity(), typeEnum);
     }
 
-    public Observable<ActivityResultInfo> startForResult(Intent intent, int requestCode) {
+    public Observable<ActivityResultInfo>  startForResult(Intent intent, int requestCode) {
         return fragment.startForResult(intent, requestCode);
     }
 
