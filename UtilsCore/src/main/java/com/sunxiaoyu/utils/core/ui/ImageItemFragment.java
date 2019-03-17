@@ -1,4 +1,4 @@
-package com.sunxiaoyu.utils.core.view;
+package com.sunxiaoyu.utils.core.ui;
 
 
 import android.os.Bundle;
@@ -12,6 +12,8 @@ import android.widget.ImageView;
 import com.bumptech.glide.Glide;
 import com.sunxiaoyu.utils.core.photoview.PhotoView;
 import com.sunxiaoyu.utils.core.photoview.PhotoViewAttacher;
+import com.sunxiaoyu.utils.core.utils.ImageUtils;
+import com.sunxiaoyu.utils.core.utils.StringUtils;
 
 /**
  * @author: SunXiaoYu
@@ -32,7 +34,9 @@ public class ImageItemFragment extends Fragment implements PhotoViewAttacher.ISi
             photoView.setScaleType(ImageView.ScaleType.FIT_CENTER);
         }
         String photoPath = getArguments().getString("photoPath");
-        Glide.with(this).load(photoPath).into(photoView);
+        if (StringUtils.isNotNull(photoPath)){
+            ImageUtils.loadImage(this, photoView, photoPath);
+        }
 
         return photoView;
     }

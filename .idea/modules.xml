@@ -3,8 +3,10 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/SxyUtilsCore.iml" filepath="$PROJECT_DIR$/SxyUtilsCore.iml" />
+      <module fileurl="file://$PROJECT_DIR$/SxyUtilsCore.iml" filepath="$PROJECT_DIR$/SxyUtilsCore.iml" />
       <module fileurl="file://$PROJECT_DIR$/UtilsCore/UtilsCore.iml" filepath="$PROJECT_DIR$/UtilsCore/UtilsCore.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/testmodule/testmodule.iml" filepath="$PROJECT_DIR$/testmodule/testmodule.iml" />
       <module fileurl="file://$PROJECT_DIR$/testmodule/testmodule.iml" filepath="$PROJECT_DIR$/testmodule/testmodule.iml" />
     </modules>
   </component>

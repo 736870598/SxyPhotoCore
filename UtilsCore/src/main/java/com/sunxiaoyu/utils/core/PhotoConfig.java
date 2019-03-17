@@ -19,6 +19,8 @@ public class PhotoConfig {
     public static final String PHOTO_PATH_LIST = "photoPathList";
     //查看照片位置
     public static final String SEE_POS = "seePos";
+    //查看照片位置
+    public static final String SCREEN_ORIENTATION = "screen_orientation";
 
     /**
      * 返回给调用者使用，拍照或选取后图片的保存路径

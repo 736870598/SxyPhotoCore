@@ -13,7 +13,6 @@ import android.widget.TextView;
 
 import com.sunxiaoyu.utils.core.PhotoConfig;
 import com.sunxiaoyu.utils.R;
-import com.sunxiaoyu.utils.core.view.ImageItemFragment;
 
 import java.util.ArrayList;
 
@@ -35,6 +34,14 @@ public class SxySeePhotoActivity extends AppCompatActivity implements ViewPager.
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        //设置屏幕方向
+        int ori = getIntent().getIntExtra(PhotoConfig.SCREEN_ORIENTATION, -1);
+        if (ori != -1){
+            if(this.getResources().getConfiguration().orientation != ori){
+                setRequestedOrientation(ori);
+            }
+        }
 
         //设置全屏
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,

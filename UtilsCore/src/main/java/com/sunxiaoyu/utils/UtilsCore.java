@@ -3,6 +3,8 @@ package com.sunxiaoyu.utils;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
+import android.content.res.Configuration;
 
 import com.sunxiaoyu.utils.core.ActivityResult;
 import com.sunxiaoyu.utils.core.PhotoConfig;
@@ -112,10 +114,24 @@ public class UtilsCore {
      * @param seePos    查看图片位置
      */
     public void seePhoto(Context context, ArrayList<String> pathList, int seePos){
+        seePhoto(context, pathList, seePos, context.getResources().getConfiguration().orientation);
+    }
+
+    /**
+     * 查看图片
+     * @param context   上下文
+     * @param pathList  路径集合
+     * @param seePos    查看图片位置
+     * @param screenOrientation   屏幕方向
+     * ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE 横屏
+     * ActivityInfo.SCREEN_ORIENTATION_PORTRAIT  竖屏
+     */
+    public void seePhoto(Context context, ArrayList<String> pathList, int seePos, int screenOrientation){
         Intent intent = new Intent(context, SxySeePhotoActivity.class);
         intent.putExtra(PhotoConfig.ONE_PHOTO, false);
         intent.putStringArrayListExtra(PhotoConfig.PHOTO_PATH_LIST, pathList);
         intent.putExtra(PhotoConfig.SEE_POS, seePos);
+        intent.putExtra(PhotoConfig.SCREEN_ORIENTATION, screenOrientation);
         context.startActivity(intent);
     }
 
@@ -125,12 +141,24 @@ public class UtilsCore {
      * @param path      路径
      */
     public void seePhoto(Context context, String path){
+        seePhoto(context, path, context.getResources().getConfiguration().orientation);
+    }
+
+    /**
+     * 查看图片
+     * @param context   上下文
+     * @param path      路径
+     * @param screenOrientation   屏幕方向
+     * ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE 横屏
+     * ActivityInfo.SCREEN_ORIENTATION_PORTRAIT  竖屏
+     */
+    public void seePhoto(Context context, String path, int screenOrientation){
         Intent intent = new Intent(context, SxySeePhotoActivity.class);
         intent.putExtra(PhotoConfig.ONE_PHOTO, true);
         intent.putExtra(PhotoConfig.PHOTO_PATH, path);
+        intent.putExtra(PhotoConfig.SCREEN_ORIENTATION, screenOrientation);
         context.startActivity(intent);
     }
-
 
 
     /**

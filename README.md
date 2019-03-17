@@ -1,10 +1,10 @@
 # SxyUtilsCore
- 用于选择照片，相机拍照，jpeg压缩图片，查看图片， 加载图片，权限申请，acticviry跳转等，所有功能都支持响应式编程，就像使用Retrofit一样使用。
+ 用于选择照片，相机拍照，查看图片，加载图片，权限申请，acticviry跳转等，所有功能都支持响应式编程，就像使用Retrofit一样使用。
 
 ### ------------------------------------------------------------------------------------------
 ##### 说明：
 
-1. 如果使用拍照、选照或压缩功能，请提前声明好读写外置卡的权限
+1. 如果使用拍照、选照功能，请提前声明好读写外置卡的权限
     
         <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
         
@@ -35,12 +35,8 @@
                         android:name="android.support.FILE_PROVIDER_PATHS"
                         android:resource="@xml/file_paths" />
                 </provider>
-            
-        
-2. 加载图片使用的是Gilde框架，默认缓存保存在context.getExternalCacheDir()/imageCache, 默认磁盘缓冲最大为100M，在7.0以上请在xm中声明该文件的使用权
- 
 
-3. 请务必在主module的build.gradle中引入：
+2. 请务必在主module的build.gradle中引入：
 
         compile 'com.android.support:appcompat-v7:25.3.1'
         compile 'io.reactivex.rxjava2:rxjava:2.1.1'
@@ -48,13 +44,7 @@
         compile 'com.github.bumptech.glide:glide:4.0.0-RC0'
         annotationProcessor 'com.github.bumptech.glide:compiler:4.0.0-RC0'
 
-4. 图片压缩使用的是jpeg酷进行压缩的，请在主module的build.gradle中的defaultConfig标签下加入：
-
-         ndk {
-               abiFilters "armeabi","armeabi-v7a"
-         }
-
-5. 混淆问题不用担心，自带混淆文件。
+3. 混淆问题不用担心，自带混淆文件。
 ### ------------------------------------------------------------------------------------------
 
 ## 核心类 UtilsCore
@@ -63,45 +53,35 @@
      * 选择照片
      * @param act           activity
      * @param requestCode   请求code
-     * @param needCompress  是否需要压缩
-     * @param savePath      压缩后保存路径
      * @param callback      照片选择后回调函数
      */
-    public void selectPicture(Activity act, int requestCode, boolean needCompress,
-                                String savePath, ActivityResult.Callback callback)
+    public void selectPicture(Activity act, int requestCode, ActivityResult.Callback callback)
 
     /**
      * 选择照片
      * @param act           activity
      * @param requestCode   请求code
-     * @param needCompress  是否需要压缩
-     * @param savePath      压缩后保存路径
      * @return  RxJava使用Observable
      */
-    public Observable<ActivityResultInfo> selectPicture(Activity act, int requestCode,
-                                                        boolean needCompress, String savePath)
+    public Observable<ActivityResultInfo> selectPicture(Activity act, int requestCode)
 
     /**
      * 拍照
      * @param act           activity
      * @param requestCode   请求code
-     * @param needCompress  是否需要压缩
-     * @param savePath      压缩后保存路径
+     * @param savePath      保存路径
      * @param callback      照片选择后回调函数
      */
-    public void takePicture(Activity act, int requestCode, boolean needCompress,
-                                String savePath, ActivityResult.Callback callback)
+    public void takePicture(Activity act, int requestCode, String savePath, ActivityResult.Callback callback)
 
     /**
      * 拍照
      * @param act           activity
      * @param requestCode   请求code
-     * @param needCompress  是否需要压缩
-     * @param savePath      压缩后保存路径
+     * @param savePath      保存路径
      * @return  RxJava使用Observable
      */
-    public Observable<ActivityResultInfo> takePicture(Activity act, int requestCode,
-                                                        boolean needCompress, String savePath)
+    public Observable<ActivityResultInfo> takePicture(Activity act, int requestCode, String savePath)
 
     /**
      * 申请权限 （直到用户做出最终选择。 《同意》 或 《点击了不再询问并拒绝了，而且还不去设置界面设置》）
@@ -138,21 +118,6 @@
      * @param seePos    查看图片位置
      */
     public void seePhoto(Context context, ArrayList<String> pathList, int seePos)
-
-    /**
-     * 查看图片
-     * @param context   上下文
-     * @param path      路径
-     */
-    public void seePhoto(Context context, String path)
-
-    /**
-     * 压缩图片
-     * @param bitmap    图片
-     * @param savePath  保存路径
-     * @param quality   压缩质量（默认30%）
-     */
-    public void compress(Bitmap bitmap, String savePath, int quality)
 
     /**
      * 加载图片
