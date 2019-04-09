@@ -30,7 +30,7 @@ public class SxySelectPictureFragment extends SxyBaseFragment {
     }
 
     @Override
-    protected void doSomethingResult(int requestCode, int resultCode, Intent data) {
+    protected void doSomethingResult(int requestCode, final int resultCode, Intent data) {
         if (data != null && resultCode == Activity.RESULT_OK && requestCode == SELECT_PICTURE_CODE){
             disposable = Observable.just(data)
                     .subscribeOn(Schedulers.io())
@@ -46,18 +46,18 @@ public class SxySelectPictureFragment extends SxyBaseFragment {
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(new Consumer<Intent>() {
                         @Override
-                        public void accept(Intent data) throws Exception {
-                            setResult(new ActivityResultInfo(data), true);
+                        public void accept(Intent data) {
+                            setResult(new ActivityResultInfo(resultCode, data));
                         }
                     }, new Consumer<Throwable>() {
                         @Override
-                        public void accept(Throwable throwable) throws Exception {
-                            setResult(new ActivityResultInfo(throwable.getMessage()), true);
+                        public void accept(Throwable throwable) {
+                            setResult(new ActivityResultInfo(Activity.RESULT_CANCELED, null));
                             throwable.printStackTrace();
                         }
                     });
         }else{
-            setResult(new ActivityResultInfo(2, data), true);
+            setResult(new ActivityResultInfo(resultCode, data));
         }
     }
 

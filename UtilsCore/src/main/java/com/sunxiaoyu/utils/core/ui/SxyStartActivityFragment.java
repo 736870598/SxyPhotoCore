@@ -1,6 +1,5 @@
 package com.sunxiaoyu.utils.core.ui;
 
-import android.app.Activity;
 import android.content.Intent;
 
 import com.sunxiaoyu.utils.core.model.ActivityResultInfo;
@@ -20,10 +19,6 @@ public class SxyStartActivityFragment extends SxyBaseFragment {
 
     @Override
     protected void doSomethingResult(int requestCode, int resultCode, Intent data) {
-        if (START_ACTIVITY == requestCode && resultCode == Activity.RESULT_OK){
-            setResult(new ActivityResultInfo(data), true);
-        }else{
-            setResult(new ActivityResultInfo(2, data),true);
-        }
+        setResult(new ActivityResultInfo(resultCode, data));
     }
 }

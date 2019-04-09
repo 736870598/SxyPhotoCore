@@ -9,6 +9,9 @@ import android.view.View;
 import com.sunxiaoyu.utils.UtilsCore;
 import com.sunxiaoyu.utils.core.PhotoConfig;
 import com.sunxiaoyu.utils.core.model.ActivityResultInfo;
+import com.sunxiaoyu.utils.core.utils.FileUtils;
+
+import java.io.File;
 
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
@@ -38,20 +41,21 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void accept(ActivityResultInfo activityResultInfo) throws Exception {
                         Log.v("sun--", activityResultInfo.toString());
-                        String path = activityResultInfo.getData().getStringExtra(PhotoConfig.RESULT_PHOTO_PATH);
+                        String path = activityResultInfo.getPhotoPath();
                         Log.v("sun--", path);
                     }
                 });
     }
 
     public void onTakeClick(View view){
-        String savePath = getExternalCacheDir().getAbsolutePath() + "/q.jpg";
+        File file = FileUtils.createFile(getExternalCacheDir().getAbsolutePath(), "/q.jpg");
+        String savePath = file.getAbsolutePath();
         UtilsCore.manager().takePicture(this, 100,savePath)
                 .subscribe(new Consumer<ActivityResultInfo>() {
                     @Override
                     public void accept(ActivityResultInfo activityResultInfo) throws Exception {
                         Log.v("sun--", activityResultInfo.toString());
-                        String path = activityResultInfo.getData().getStringExtra(PhotoConfig.RESULT_PHOTO_PATH);
+                        String path = activityResultInfo.getPhotoPath();
                         Log.v("sun--", path);
                     }
                 });

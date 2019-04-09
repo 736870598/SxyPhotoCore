@@ -1,45 +1,24 @@
 package com.sunxiaoyu.utils.core.model;
 
+import android.app.Activity;
 import android.content.Intent;
 
+import com.sunxiaoyu.utils.core.PhotoConfig;
+
+import java.io.Serializable;
+
 /**
+ *  Activity返回结果
  */
-public class ActivityResultInfo {
+public class ActivityResultInfo implements Serializable {
 
-    //状态吗：0 完成  1 处理中  2 取消了  3 出错了
-    private int state;
-    //错误信息 当状态码为 3 时有值
-    private String errorMsg;
-    //返回的data
-    private Intent data;
-    //请求码
     private int requestCode;
+    private int resultCode;
+    private Intent data;
 
-    public ActivityResultInfo(Intent data) {
-        this.state = 0;
+    public ActivityResultInfo(int resultCode, Intent data) {
+        this.resultCode = resultCode;
         this.data = data;
-    }
-
-    public ActivityResultInfo(int state, Intent data) {
-        this.state = state;
-        this.data = data;
-    }
-
-    public ActivityResultInfo(String errorMsg) {
-        this.state =3;
-        this.errorMsg = errorMsg;
-    }
-
-    public int getState() {
-        return state;
-    }
-
-    public String getErrorMsg() {
-        return errorMsg;
-    }
-
-    public Intent getData() {
-        return data;
     }
 
     public int getRequestCode() {
@@ -50,17 +29,43 @@ public class ActivityResultInfo {
         this.requestCode = requestCode;
     }
 
-    public boolean success(){
-        return state == 0;
+    public int getResultCode() {
+        return resultCode;
+    }
+
+    public void setResultCode(int resultCode) {
+        this.resultCode = resultCode;
+    }
+
+    public Intent getData() {
+        return data;
+    }
+
+    public void setData(Intent data) {
+        this.data = data;
+    }
+
+    public boolean resultIsOk(){
+        return resultCode == Activity.RESULT_OK;
+    }
+
+    public boolean resultIsOkAndDataNotNull(){
+        return resultIsOk() && data != null;
+    }
+
+    public String getPhotoPath(){
+        if (resultIsOkAndDataNotNull()){
+            return getData().getStringExtra(PhotoConfig.RESULT_PHOTO_PATH);
+        }
+        return null;
     }
 
     @Override
     public String toString() {
         return "ActivityResultInfo{" +
-                "state=" + state +
-                ", errorMsg='" + errorMsg + '\'' +
+                "requestCode=" + requestCode +
+                ", resultCode=" + resultCode +
                 ", data=" + data +
-                ", requestCode=" + requestCode +
                 '}';
     }
 }

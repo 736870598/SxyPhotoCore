@@ -65,7 +65,7 @@ public abstract class SxyBaseFragment extends Fragment {
     }
 
 
-    protected void setResult(ActivityResultInfo info, boolean isFinish){
+    protected void setResult(ActivityResultInfo info){
         if (info == null){
             return;
         }else{
@@ -80,9 +80,7 @@ public abstract class SxyBaseFragment extends Fragment {
                 mSubject.onNext(info);
             }
         }
-        if (isFinish){
-            finish();
-        }
+        finish();
     }
 
     @Override
