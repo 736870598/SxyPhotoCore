@@ -2,6 +2,25 @@
  用于选择照片，相机拍照，查看图片，加载图片，权限申请，acticviry跳转等，所有功能都支持响应式编程，就像使用Retrofit一样使用。
 
 ### ------------------------------------------------------------------------------------------
+##### 使用：
+
+Step 1. Add it in your root build.gradle at the end of repositories:
+
+    allprojects {
+            repositories {
+                ...
+                maven { url 'https://www.jitpack.io' }
+            }
+        }
+        
+Step 2. Add the dependency：
+
+	dependencies {
+    	  implementation 'com.github.736870598:SxyUtilsCore:1.1.0'
+    }
+
+
+
 ##### 说明：
 
 1. 如果使用拍照、选照功能，请提前声明好读写外置卡的权限
